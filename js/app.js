@@ -36,9 +36,11 @@ function render() {
     lImgIndex = randomImages();
     mImgIndex = randomImages();
     rImgIndex = randomImages();
+    attemotEl.textContent = attempts;
 
-    while (lImgIndex === mImgIndex && lImgIndex === rImgIndex && mImgIndex === lImgIndex && mImgIndex === rImgIndex) {
+    while (lImgIndex === mImgIndex || lImgIndex === rImgIndex || mImgIndex === lImgIndex || mImgIndex === rImgIndex){
         lImgIndex = randomImages();
+        mImgIndex = randomImages();
     }
 
 
