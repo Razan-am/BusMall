@@ -39,7 +39,6 @@ function render() {
 
     while (lImgIndex === mImgIndex && lImgIndex === rImgIndex && mImgIndex === lImgIndex && mImgIndex === rImgIndex) {
         lImgIndex = randomImages();
-        mImgIndex = randomImages();
     }
 
 
@@ -76,6 +75,7 @@ function imgClick(event) {
         let contaner = document.getElementById('imgContainer');
         let btnEl = document.createElement('button');
         contaner.appendChild(btnEl);
+        btnEl.textContent = 'View Results';
 
         btnEl.addEventListener('click', btnClick);
 
@@ -86,7 +86,7 @@ function imgClick(event) {
             for (let i = 0; i < products.length; i++) {
                 liEl = document.createElement('li');
                 ulEl.appendChild(liEl);
-                liEl.textContent = `${products[i].imageName}had ${products[i].click} votes, and was seen ${products[i].views} times.`
+                liEl.textContent = `${products[i].imageName}  had ${products[i].click} votes, and was seen ${products[i].views} times.`
             }
         }
         leftImgEl.removeEventListener('click', imgClick);
