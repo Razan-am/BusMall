@@ -1,0 +1,15 @@
+#imgContainer{
+    display: block;
+}
+#leftImage{
+    width: 100px;
+    height: 100px;
+}
+#middleImage{
+    width: 100px;
+    height: 100px;
+}
+#rightImage{
+    width: 100px;
+    height: 100px;
+}
