@@ -44,6 +44,7 @@ function render() {
     rImgIndex = randomImages();
     attemotEl.textContent = attempts;
 
+
     while (lImgIndex === mImgIndex || lImgIndex === rImgIndex || mImgIndex === lImgIndex || mImgIndex === rImgIndex) {
         lImgIndex = randomImages();
         mImgIndex = randomImages();
@@ -63,11 +64,13 @@ function render() {
     rightImgEl.setAttribute('title', products[rImgIndex].src);
     products[rImgIndex].views++;
 
-    firstArray.push(products[lImgIndex],products[mImgIndex],products[rImgIndex]);
+    firstArray.push(products[lImgIndex], products[rImgIndex],products[mImgIndex]);
     for (let index = 0; index < firstArray.length; index++) {
-        if (products[lImgIndex] === firstArray[index] ||products[mImgIndex] === firstArray[index] || products[rImgIndex] === firstArray[index]) {
+        if (products[lImgIndex] === firstArray[index]) {
             lImgIndex = randomImages();
+        }else if (products[mImgIndex] === firstArray[index]){
             mImgIndex = randomImages();
+        }else if (products[rImgIndex] === firstArray[index]){
             rImgIndex = randomImages();
         }
     }
@@ -138,7 +141,7 @@ function chartRender() {
                 ],
                 borderWidth: 3
             }, {
-                label: '# of clicks',
+                label: '# of votes',
                 data: clickArray,
                 backgroundColor: [
                     'rgba(153, 102, 255, 0.2)',
