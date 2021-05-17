@@ -6,6 +6,7 @@ let attemotEl = document.getElementById('attempts');
 let productsNames = [];
 let viewArray = [];
 let clickArray = [];
+let firstArray = [];
 
 let products = [];
 function ProductImage(imageName) {
@@ -17,6 +18,7 @@ function ProductImage(imageName) {
     productsNames.push(this.imageName);
 }
 console.log(products);
+console.log(firstArray);
 
 let images = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'water-can.jpg', 'wine-glass.jpg'];
 
@@ -52,6 +54,7 @@ function render() {
     leftImgEl.setAttribute('title', products[lImgIndex].src);
     products[lImgIndex].views++;
 
+
     middleImgEl.setAttribute('src', products[mImgIndex].src);
     middleImgEl.setAttribute('title', products[mImgIndex].src);
     products[mImgIndex].views++;
@@ -59,8 +62,19 @@ function render() {
     rightImgEl.setAttribute('src', products[rImgIndex].src);
     rightImgEl.setAttribute('title', products[rImgIndex].src);
     products[rImgIndex].views++;
+
+    firstArray.push(products[lImgIndex],products[mImgIndex],products[rImgIndex]);
+    for (let index = 0; index < firstArray.length; index++) {
+        if (products[lImgIndex] === firstArray[index] ||products[mImgIndex] === firstArray[index] || products[rImgIndex] === firstArray[index]) {
+            lImgIndex = randomImages();
+            mImgIndex = randomImages();
+            rImgIndex = randomImages();
+        }
+    }
+
 }
 render();
+console.log(render);
 
 leftImgEl.addEventListener('click', imgClick);
 middleImgEl.addEventListener('click', imgClick);
@@ -144,5 +158,5 @@ function chartRender() {
         }
     });
 }
-console.log(viewArray);
-console.log(clickArray);
+// console.log(viewArray);
+// console.log(clickArray);
