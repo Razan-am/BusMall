@@ -3,6 +3,9 @@
 let attempts = 0;
 let maxAttempts = 25;
 let attemotEl = document.getElementById('attempts');
+let productsNames = [];
+let viewArray = [];
+let clickArray = [];
 
 let products = [];
 function ProductImage(imageName) {
@@ -11,6 +14,7 @@ function ProductImage(imageName) {
     this.click = 0;
     this.views = 0;
     products.push(this);
+    productsNames.push(this.imageName);
 }
 console.log(products);
 
@@ -38,7 +42,7 @@ function render() {
     rImgIndex = randomImages();
     attemotEl.textContent = attempts;
 
-    while (lImgIndex === mImgIndex || lImgIndex === rImgIndex || mImgIndex === lImgIndex || mImgIndex === rImgIndex){
+    while (lImgIndex === mImgIndex || lImgIndex === rImgIndex || mImgIndex === lImgIndex || mImgIndex === rImgIndex) {
         lImgIndex = randomImages();
         mImgIndex = randomImages();
     }
@@ -88,11 +92,57 @@ function imgClick(event) {
             for (let i = 0; i < products.length; i++) {
                 liEl = document.createElement('li');
                 ulEl.appendChild(liEl);
-                liEl.textContent = `${products[i].imageName}  had ${products[i].click} votes, and was seen ${products[i].views} times.`
+                liEl.textContent = `${products[i].imageName}  had ${products[i].click} votes, and was seen ${products[i].views} times.`;
+
             }
         }
         leftImgEl.removeEventListener('click', imgClick);
         middleImgEl.removeEventListener('click', imgClick);
         rightImgEl.removeEventListener('click', imgClick);
+        chartRender();
     }
 }
+
+function chartRender() {
+    for (let index = 0; index < products.length; index++) {
+        viewArray.push(products[index].views);
+        clickArray.push(products[index].click);
+    }
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: productsNames,
+            datasets: [{
+                label: '# of views',
+                data: viewArray,
+                backgroundColor: [
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 3
+            }, {
+                label: '# of clicks',
+                data: clickArray,
+                backgroundColor: [
+                    'rgba(153, 102, 255, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(153, 102, 255, 1)',
+                ],
+                borderWidth: 3
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+console.log(viewArray);
+console.log(clickArray);
