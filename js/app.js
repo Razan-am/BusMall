@@ -38,18 +38,22 @@ let lImgIndex;
 let mImgIndex;
 let rImgIndex;
 
+
 function render() {
     lImgIndex = randomImages();
     mImgIndex = randomImages();
     rImgIndex = randomImages();
     attemotEl.textContent = attempts;
+    firstArray.push(lImgIndex);
+    firstArray.push(mImgIndex);
+    firstArray.push(rImgIndex);
 
-
-    while (lImgIndex === mImgIndex || lImgIndex === rImgIndex || mImgIndex === lImgIndex || mImgIndex === rImgIndex) {
+    while (lImgIndex === rImgIndex || lImgIndex === mImgIndex || mImgIndex === rImgIndex || firstArray.includes(lImgIndex) || firstArray.includes(mImgIndex) || firstArray.includes(rImgIndex)) {
         lImgIndex = randomImages();
         mImgIndex = randomImages();
+        rImgIndex = randomImages();
     }
-
+    firstArray = [];
 
     leftImgEl.setAttribute('src', products[lImgIndex].src);
     leftImgEl.setAttribute('title', products[lImgIndex].src);
@@ -64,20 +68,8 @@ function render() {
     rightImgEl.setAttribute('title', products[rImgIndex].src);
     products[rImgIndex].views++;
 
-    firstArray.push(products[lImgIndex], products[rImgIndex],products[mImgIndex]);
-    for (let index = 0; index < firstArray.length; index++) {
-        if (products[lImgIndex] === firstArray[index]) {
-            lImgIndex = randomImages();
-        }else if (products[mImgIndex] === firstArray[index]){
-            mImgIndex = randomImages();
-        }else if (products[rImgIndex] === firstArray[index]){
-            rImgIndex = randomImages();
-        }
-    }
-
 }
 render();
-console.log(render);
 
 leftImgEl.addEventListener('click', imgClick);
 middleImgEl.addEventListener('click', imgClick);
