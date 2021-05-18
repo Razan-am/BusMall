@@ -181,5 +181,3 @@ function chartRender() {
         }
     });
 }
-// console.log(viewArray);
-// console.log(clickArray);
