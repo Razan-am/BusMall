@@ -30,6 +30,7 @@ function randomImages() {
     return Math.floor(Math.random() * products.length);
 }
 
+
 let leftImgEl = document.getElementById('leftImage');
 let middleImgEl = document.getElementById('middleImage');
 let rightImgEl = document.getElementById('rightImage');
@@ -43,7 +44,9 @@ function render() {
     lImgIndex = randomImages();
     mImgIndex = randomImages();
     rImgIndex = randomImages();
+
     attemotEl.textContent = attempts;
+
 
     while (lImgIndex === rImgIndex || lImgIndex === mImgIndex || mImgIndex === rImgIndex || firstArray.includes(lImgIndex) || firstArray.includes(mImgIndex) || firstArray.includes(rImgIndex)) {
         lImgIndex = randomImages();
@@ -75,6 +78,28 @@ leftImgEl.addEventListener('click', imgClick);
 middleImgEl.addEventListener('click', imgClick);
 rightImgEl.addEventListener('click', imgClick);
 
+function settingIteams (){
+    let data = JSON.stringify(products);
+    localStorage.setItem ('Images',data);
+
+    let att = JSON.stringify(attempts);
+    localStorage.setItem('Attempts' , att);
+}
+
+function gettingIteam (){
+    let stringObj = localStorage.getItem ('Images');
+    let normalObj = JSON.parse (stringObj);
+    if (normalObj !== null){
+        products = normalObj;
+    }
+
+    let newAtt = localStorage.getItem ('Attempts');
+    let finalAtt = JSON.parse (newAtt);
+    if (finalAtt !== null){
+        attempts = finalAtt;
+    }
+}
+
 function imgClick(event) {
     attempts++;
     if (attempts <= maxAttempts) {
@@ -86,6 +111,7 @@ function imgClick(event) {
             products[rImgIndex].click++;
         }
         render();
+        settingIteams();
     } else {
         let contaner = document.getElementById('imgContainer');
         let btnEl = document.createElement('button');
@@ -104,13 +130,14 @@ function imgClick(event) {
                 liEl.textContent = `${products[i].imageName}  had ${products[i].click} votes, and was seen ${products[i].views} times.`;
 
             }
-        }
+        }       
         leftImgEl.removeEventListener('click', imgClick);
         middleImgEl.removeEventListener('click', imgClick);
         rightImgEl.removeEventListener('click', imgClick);
         chartRender();
     }
 }
+gettingIteam ();
 
 function chartRender() {
     for (let index = 0; index < products.length; index++) {
