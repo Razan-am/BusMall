@@ -44,9 +44,6 @@ function render() {
     mImgIndex = randomImages();
     rImgIndex = randomImages();
     attemotEl.textContent = attempts;
-    firstArray.push(lImgIndex);
-    firstArray.push(mImgIndex);
-    firstArray.push(rImgIndex);
 
     while (lImgIndex === rImgIndex || lImgIndex === mImgIndex || mImgIndex === rImgIndex || firstArray.includes(lImgIndex) || firstArray.includes(mImgIndex) || firstArray.includes(rImgIndex)) {
         lImgIndex = randomImages();
@@ -54,6 +51,9 @@ function render() {
         rImgIndex = randomImages();
     }
     firstArray = [];
+    firstArray.push(lImgIndex);
+    firstArray.push(mImgIndex);
+    firstArray.push(rImgIndex);
 
     leftImgEl.setAttribute('src', products[lImgIndex].src);
     leftImgEl.setAttribute('title', products[lImgIndex].src);
