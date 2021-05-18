@@ -82,8 +82,8 @@ function settingIteams (){
     let data = JSON.stringify(products);
     localStorage.setItem ('Images',data);
 
-    let att = JSON.stringify(attempts);
-    localStorage.setItem('Attempts' , att);
+    // let att = JSON.stringify(attempts);
+    // localStorage.setItem('Attempts' , att);
 }
 
 function gettingIteam (){
@@ -93,11 +93,11 @@ function gettingIteam (){
         products = normalObj;
     }
 
-    let newAtt = localStorage.getItem ('Attempts');
-    let finalAtt = JSON.parse (newAtt);
-    if (finalAtt !== null){
-        attempts = finalAtt;
-    }
+    // let newAtt = localStorage.getItem ('Attempts');
+    // let finalAtt = JSON.parse (newAtt);
+    // if (finalAtt !== null){
+    //     attempts = finalAtt;
+    // }
 }
 
 function imgClick(event) {
@@ -138,6 +138,7 @@ function imgClick(event) {
     }
 }
 gettingIteam ();
+gettingIteam.clear ;
 
 function chartRender() {
     for (let index = 0; index < products.length; index++) {
@@ -180,5 +181,3 @@ function chartRender() {
         }
     });
 }
-// console.log(viewArray);
-// console.log(clickArray);
